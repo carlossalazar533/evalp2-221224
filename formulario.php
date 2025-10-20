@@ -12,8 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $base = filter_input(INPUT_POST, 'base', FILTER_VALIDATE_FLOAT);
     $altura_rect = filter_input(INPUT_POST, 'altura_rect', FILTER_VALIDATE_FLOAT);
 
-    if ($radio === false || $altura === false || $base === false || $altura_rect === false) {
-        $error = "Todos los campos deben ser números positivos";
+    // Verificar que todos sean números positivos
+    if ($radio === false || $altura === false || $base === false || $altura_rect === false || 
+        $radio <= 0 || $altura <= 0 || $base <= 0 || $altura_rect <= 0) {
+        $error = "Todos los campos deben ser números positivos y mayores que cero";
     } else {
         // Área y volumen del cilindro
         $area_cil = 2 * pi() * $radio * ($radio + $altura);
@@ -108,12 +110,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <form method="post" action="">
         <h3>Cilindro</h3>
-        Radio: <input type="number" step="0.01" name="radio" required><br>
-        Altura: <input type="number" step="0.01" name="altura" required><br>
+        Radio: <input type="number" step="0.01" min="0.01" name="radio" required><br>
+        Altura: <input type="number" step="0.01" min="0.01" name="altura" required><br>
 
         <h3>Rectángulo</h3>
-        Base: <input type="number" step="0.01" name="base" required><br>
-        Altura: <input type="number" step="0.01" name="altura_rect" required><br>
+        Base: <input type="number" step="0.01" min="0.01" name="base" required><br>
+        Altura: <input type="number" step="0.01" min="0.01" name="altura_rect" required><br>
 
         <input type="submit" value="Calcular">
     </form>
