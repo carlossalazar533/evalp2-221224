@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: dashboard.php");
         exit(); // Siempre exit() después de header()
     } else {
-        $error = "Usuario o contraseña incorrectos";
+        $error = "Usuario o contraseña es incorrecto";
     }
 }
 ?>
